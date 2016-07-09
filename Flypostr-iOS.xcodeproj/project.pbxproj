@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14789B3F59A55ADDFF0D469A /* Pods_Flypostr_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8008D3FFD2FD679E89FF8F /* Pods_Flypostr_iOS.framework */; };
 		38F7B6781D3180DA00E3FFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */; };
 		38F7B67A1D3180DA00E3FFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7B6791D3180DA00E3FFE8 /* ViewController.swift */; };
 		38F7B67D1D3180DA00E3FFE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B67B1D3180DA00E3FFE8 /* Main.storyboard */; };
 		38F7B67F1D3180DA00E3FFE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B67E1D3180DA00E3FFE8 /* Assets.xcassets */; };
 		38F7B6821D3180DA00E3FFE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B6801D3180DA00E3FFE8 /* LaunchScreen.storyboard */; };
+		38F7B68C1D3183B100E3FFE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B68B1D3183B100E3FFE8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,10 @@
 		38F7B67E1D3180DA00E3FFE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38F7B6811D3180DA00E3FFE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38F7B6831D3180DA00E3FFE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38F7B68B1D3183B100E3FFE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		89F3895FDFD0411A4807695A /* Pods-Flypostr-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flypostr-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		AD345D8B62936EE71CA7306B /* Pods-Flypostr-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flypostr-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FF8008D3FFD2FD679E89FF8F /* Pods_Flypostr_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flypostr_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14789B3F59A55ADDFF0D469A /* Pods_Flypostr_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				38F7B6761D3180DA00E3FFE8 /* Flypostr-iOS */,
 				38F7B6751D3180D900E3FFE8 /* Products */,
+				58A8611FD2D190F112248EB1 /* Pods */,
+				F68523306C87695C823E58F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,8 +69,26 @@
 				38F7B67E1D3180DA00E3FFE8 /* Assets.xcassets */,
 				38F7B6801D3180DA00E3FFE8 /* LaunchScreen.storyboard */,
 				38F7B6831D3180DA00E3FFE8 /* Info.plist */,
+				38F7B68B1D3183B100E3FFE8 /* GoogleService-Info.plist */,
 			);
 			path = "Flypostr-iOS";
+			sourceTree = "<group>";
+		};
+		58A8611FD2D190F112248EB1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD345D8B62936EE71CA7306B /* Pods-Flypostr-iOS.debug.xcconfig */,
+				89F3895FDFD0411A4807695A /* Pods-Flypostr-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F68523306C87695C823E58F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF8008D3FFD2FD679E89FF8F /* Pods_Flypostr_iOS.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38F7B6861D3180DA00E3FFE8 /* Build configuration list for PBXNativeTarget "Flypostr-iOS" */;
 			buildPhases = (
+				994C980B22803195AB65EC86 /* [CP] Check Pods Manifest.lock */,
 				38F7B6701D3180D900E3FFE8 /* Sources */,
 				38F7B6711D3180D900E3FFE8 /* Frameworks */,
 				38F7B6721D3180D900E3FFE8 /* Resources */,
+				31520B106D2DA9379DC69F19 /* [CP] Embed Pods Frameworks */,
+				744151FECC94828AB126D4AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,12 +153,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				38F7B6821D3180DA00E3FFE8 /* LaunchScreen.storyboard in Resources */,
+				38F7B68C1D3183B100E3FFE8 /* GoogleService-Info.plist in Resources */,
 				38F7B67F1D3180DA00E3FFE8 /* Assets.xcassets in Resources */,
 				38F7B67D1D3180DA00E3FFE8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		31520B106D2DA9379DC69F19 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		744151FECC94828AB126D4AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		994C980B22803195AB65EC86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		38F7B6701D3180D900E3FFE8 /* Sources */ = {
@@ -249,6 +328,7 @@
 		};
 		38F7B6871D3180DA00E3FFE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD345D8B62936EE71CA7306B /* Pods-Flypostr-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Flypostr-iOS/Info.plist";
@@ -260,6 +340,7 @@
 		};
 		38F7B6881D3180DA00E3FFE8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89F3895FDFD0411A4807695A /* Pods-Flypostr-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Flypostr-iOS/Info.plist";
@@ -288,6 +369,7 @@
 				38F7B6881D3180DA00E3FFE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
