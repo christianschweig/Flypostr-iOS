@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--Flypostr-->
         <scene sceneID="6xK-UG-zsl">
             <objects>
                 <viewController id="chF-k8-UwF" customClass="MapViewController" customModule="Flypostr_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="LDI-Nl-wKL"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="lOT-xS-tKW">
+                    <navigationItem key="navigationItem" title="Flypostr" id="lOT-xS-tKW">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="E7o-vd-PgI">
                             <connections>
                                 <action selector="onAdd:" destination="chF-k8-UwF" id="AsZ-aT-SAh"/>
@@ -46,13 +46,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEQ-7i-rB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2287" y="-140"/>
+            <point key="canvasLocation" x="2342" y="-140"/>
         </scene>
-        <!--Item-->
+        <!--List-->
+        <scene sceneID="R4r-qB-Gq3">
+            <objects>
+                <navigationController id="zHC-wx-BbH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" id="SYJ-Qm-c4n"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MHb-1N-svt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uog-bg-4hK" kind="relationship" relationship="rootViewController" id="tDF-qZ-zJs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hfk-sf-bFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1530" y="623"/>
+        </scene>
+        <!--Map-->
         <scene sceneID="OC4-Sa-uDg">
             <objects>
                 <navigationController id="5vN-uv-6Ee" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="UbD-Xh-Dxg"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="UbD-Xh-Dxg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Faz-we-WCc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -65,21 +82,37 @@
             </objects>
             <point key="canvasLocation" x="1530" y="-140"/>
         </scene>
-        <!--List-->
+        <!--In der Nähe-->
         <scene sceneID="Yij-gh-4dx">
             <objects>
-                <tableViewController id="uog-bg-4hK" sceneMemberID="viewController">
+                <tableViewController id="uog-bg-4hK" customClass="ListTableViewController" customModule="Flypostr_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="baJ-Nj-DoX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lqM-8R-XV6">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="ir4-0m-8iJ" detailTextLabel="rkp-RX-Wvx" style="IBUITableViewCellStyleSubtitle" id="lqM-8R-XV6">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lqM-8R-XV6" id="V8Q-Tw-J6F">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ir4-0m-8iJ">
+                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rkp-RX-Wvx">
+                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -89,12 +122,13 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="List" id="rzo-W6-9Ir"/>
+                    <navigationItem key="navigationItem" title="In der Nähe" id="Oi5-p8-OBD"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQ6-gf-wLF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1530" y="623"/>
+            <point key="canvasLocation" x="2342" y="623"/>
         </scene>
-        <!--About-->
+        <!--Ich-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Flypostr_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -107,11 +141,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="About" id="v8q-xK-f33"/>
+                    <navigationItem key="navigationItem" title="Ich" id="LlM-KC-47h"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1530" y="1459"/>
+            <point key="canvasLocation" x="2342" y="1459"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3EH-F5-ILX">
@@ -124,14 +158,33 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="ecU-RG-jA1"/>
-                        <segue destination="uog-bg-4hK" kind="relationship" relationship="viewControllers" id="BRf-KV-Xb4"/>
                         <segue destination="5vN-uv-6Ee" kind="relationship" relationship="viewControllers" id="awf-Zi-zYI"/>
+                        <segue destination="zHC-wx-BbH" kind="relationship" relationship="viewControllers" id="RAh-q8-2sP"/>
+                        <segue destination="iSh-pG-tnU" kind="relationship" relationship="viewControllers" id="ecU-RG-jA1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kbx-Zb-PS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="737" y="623"/>
+        </scene>
+        <!--Me-->
+        <scene sceneID="oTv-pQ-fkb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iSh-pG-tnU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Me" id="v8q-xK-f33"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NR7-Ej-qSM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="TFZ-le-brJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aIX-Wn-FVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1530" y="1459"/>
         </scene>
     </scenes>
 </document>

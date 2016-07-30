@@ -17,12 +17,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     let locationManager = CLLocationManager()
     var locValue = CLLocationCoordinate2D()
+    var array = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //var test =  //FromURL("https://flypostr-cd317.firebaseio.com/")
-        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
         
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
@@ -33,9 +31,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         mapView.delegate = self
-        //mapView.showsUserLocation = true
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.showPins(_:)), name:"refreshList", object: nil)
     }
 
+    func showPins(notification: NSNotification) {
+        var annoArray = [MKAnnotation]()
+        for item in self.array {
+            let annoItem = MKPointAnnotation()
+            annoItem.coordinate = item.coordinate
+            annoArray.append(annoItem)
+        }
+        self.mapView.showAnnotations(annoArray, animated: true)
+    }
+    
     
     @IBAction func onAdd(sender: AnyObject) {
         print("hallo")
@@ -50,11 +59,52 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         annotationView.annotation = annotation
         annotationView.canShowCallout = true
         annotationView.enabled = true
+        
+        //var test =  //FromURL("https://flypostr-cd317.firebaseio.com/")
+        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
+        let location = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
+        
+        geoFire.setLocation(location, forKey: "dummy") {
+            (error) in
+            if (error != nil) {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
+        
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locValue = manager.location!.coordinate
         print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        //TODO only make a query (i.e. requests) if new location is significantly different to old location
+        
+        let location = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
+        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
+        
+        //Radius hardcoded to 600 meters
+        var circleQuery = geoFire.queryAtLocation(location, withRadius: 100.00)
+        
+        let span = MKCoordinateSpanMake(0.800, 0.800)
+        let region = MKCoordinateRegionMake(location.coordinate, span)
+        var regionQuery = geoFire.queryWithRegion(region)
+        
+        var queryHandleEntered = regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            if !self.array.containsObject(location) {
+                self.array.addObject(location)
+            }
+        })
+        var queryHandleExited = regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
+            print("Key '\(key)' exited the search area and is at location '\(location)'")
+            self.array.removeObject(location)
+        })
+        
+        let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
+        NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
+        
     }
     
 }
