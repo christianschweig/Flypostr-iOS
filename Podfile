@@ -6,6 +6,7 @@ target 'Flypostr-iOS' do
   use_frameworks!
 
   # Pods for Flypostr-iOS
-  pod 'Firebase'
+  pod 'Firebase', '~> 3.3.0'
+  pod 'Firebase/Database'
 
 end

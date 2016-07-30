@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		14789B3F59A55ADDFF0D469A /* Pods_Flypostr_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8008D3FFD2FD679E89FF8F /* Pods_Flypostr_iOS.framework */; };
+		38C1A4711D4CE253006142C3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C1A4701D4CE253006142C3 /* MapViewController.swift */; };
+		38F258E21D4CEF71007EFF4F /* GeoFire.h in Sources */ = {isa = PBXBuildFile; fileRef = 38F258DE1D4CEF4A007EFF4F /* GeoFire.h */; };
+		38F258E31D4CEF71007EFF4F /* GFCircleQuery.h in Sources */ = {isa = PBXBuildFile; fileRef = 38F258DF1D4CEF4A007EFF4F /* GFCircleQuery.h */; };
+		38F258E41D4CEF71007EFF4F /* GFQuery.h in Sources */ = {isa = PBXBuildFile; fileRef = 38F258E01D4CEF4A007EFF4F /* GFQuery.h */; };
+		38F258E51D4CEF71007EFF4F /* GFRegionQuery.h in Sources */ = {isa = PBXBuildFile; fileRef = 38F258E11D4CEF4A007EFF4F /* GFRegionQuery.h */; };
 		38F7B6781D3180DA00E3FFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */; };
 		38F7B67A1D3180DA00E3FFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7B6791D3180DA00E3FFE8 /* ViewController.swift */; };
 		38F7B67D1D3180DA00E3FFE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B67B1D3180DA00E3FFE8 /* Main.storyboard */; };
@@ -17,6 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3827526F1D4CEB7F00E77E56 /* Flypostr-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flypostr-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		38C1A4701D4CE253006142C3 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		38F258DE1D4CEF4A007EFF4F /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		38F258DF1D4CEF4A007EFF4F /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		38F258E01D4CEF4A007EFF4F /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		38F258E11D4CEF4A007EFF4F /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
 		38F7B6741D3180D900E3FFE8 /* Flypostr-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flypostr-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38F7B6791D3180DA00E3FFE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +53,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38F258DD1D4CEF4A007EFF4F /* API */ = {
+			isa = PBXGroup;
+			children = (
+				38F258DE1D4CEF4A007EFF4F /* GeoFire.h */,
+				38F258DF1D4CEF4A007EFF4F /* GFCircleQuery.h */,
+				38F258E01D4CEF4A007EFF4F /* GFQuery.h */,
+				38F258E11D4CEF4A007EFF4F /* GFRegionQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		38F7B66B1D3180D900E3FFE8 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +85,7 @@
 		38F7B6761D3180DA00E3FFE8 /* Flypostr-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				38F258DD1D4CEF4A007EFF4F /* API */,
 				38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */,
 				38F7B6791D3180DA00E3FFE8 /* ViewController.swift */,
 				38F7B67B1D3180DA00E3FFE8 /* Main.storyboard */,
@@ -70,6 +93,8 @@
 				38F7B6801D3180DA00E3FFE8 /* LaunchScreen.storyboard */,
 				38F7B6831D3180DA00E3FFE8 /* Info.plist */,
 				38F7B68B1D3183B100E3FFE8 /* GoogleService-Info.plist */,
+				38C1A4701D4CE253006142C3 /* MapViewController.swift */,
+				3827526F1D4CEB7F00E77E56 /* Flypostr-iOS-Bridging-Header.h */,
 			);
 			path = "Flypostr-iOS";
 			sourceTree = "<group>";
@@ -104,6 +129,7 @@
 				38F7B6721D3180D900E3FFE8 /* Resources */,
 				31520B106D2DA9379DC69F19 /* [CP] Embed Pods Frameworks */,
 				744151FECC94828AB126D4AD /* [CP] Copy Pods Resources */,
+				7ECCB657C039389955F179C6 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +152,7 @@
 				TargetAttributes = {
 					38F7B6731D3180D900E3FFE8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 5A9KP8G87D;
 					};
 				};
 			};
@@ -192,6 +219,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7ECCB657C039389955F179C6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		994C980B22803195AB65EC86 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -214,7 +256,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F258E21D4CEF71007EFF4F /* GeoFire.h in Sources */,
+				38F258E31D4CEF71007EFF4F /* GFCircleQuery.h in Sources */,
+				38F258E41D4CEF71007EFF4F /* GFQuery.h in Sources */,
+				38F258E51D4CEF71007EFF4F /* GFRegionQuery.h in Sources */,
 				38F7B67A1D3180DA00E3FFE8 /* ViewController.swift in Sources */,
+				38C1A4711D4CE253006142C3 /* MapViewController.swift in Sources */,
 				38F7B6781D3180DA00E3FFE8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,10 +378,16 @@
 			baseConfigurationReference = AD345D8B62936EE71CA7306B /* Pods-Flypostr-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Flypostr-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "li.itcc.Flypostr-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flypostr-iOS/Flypostr-iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -343,10 +396,15 @@
 			baseConfigurationReference = 89F3895FDFD0411A4807695A /* Pods-Flypostr-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Flypostr-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "li.itcc.Flypostr-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Flypostr-iOS/Flypostr-iOS-Bridging-Header.h";
 			};
 			name = Release;
 		};

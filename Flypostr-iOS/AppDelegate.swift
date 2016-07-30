@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+//import GeoFire// comment when run on device, active when in simulator
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
