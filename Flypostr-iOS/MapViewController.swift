@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import Firebase
+import FirebaseDatabase
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
@@ -18,7 +20,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //var test =  //FromURL("https://flypostr-cd317.firebaseio.com/")
+        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
+        
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
