@@ -85,9 +85,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
         
         //Radius hardcoded to 600 meters
-        var circleQuery = geoFire.queryAtLocation(location, withRadius: 100.00)
+        var circleQuery = geoFire.queryAtLocation(location, withRadius: 0.6)
         
-        let span = MKCoordinateSpanMake(0.800, 0.800)
+        let span = MKCoordinateSpanMake(0.800, 0.800) // was 0.001
         let region = MKCoordinateRegionMake(location.coordinate, span)
         var regionQuery = geoFire.queryWithRegion(region)
         
