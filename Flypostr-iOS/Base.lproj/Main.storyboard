@@ -48,11 +48,11 @@
             </objects>
             <point key="canvasLocation" x="2342" y="-140"/>
         </scene>
-        <!--Timeline-->
+        <!--Liste-->
         <scene sceneID="R4r-qB-Gq3">
             <objects>
                 <navigationController id="zHC-wx-BbH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Timeline" id="SYJ-Qm-c4n"/>
+                    <tabBarItem key="tabBarItem" title="Liste" id="SYJ-Qm-c4n"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MHb-1N-svt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -167,11 +167,11 @@
             </objects>
             <point key="canvasLocation" x="737" y="623"/>
         </scene>
-        <!--Friends-->
+        <!--Me-->
         <scene sceneID="oTv-pQ-fkb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iSh-pG-tnU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" id="v8q-xK-f33"/>
+                    <tabBarItem key="tabBarItem" title="Me" id="v8q-xK-f33"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NR7-Ej-qSM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
