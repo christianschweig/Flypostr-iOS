@@ -5,12 +5,14 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "BDAA3ED9E994EAC399EEDF436242E4EC1A7C4E27" : 0,
-    "78BC981234DC9ACF745E820B97CE28D46F6D69E7" : 0
+    "78BC981234DC9ACF745E820B97CE28D46F6D69E7" : 0,
+    "82570B6D42E6BD44586ADAC3795CFCD033370E82" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "52CF8255-907C-42D7-BBEB-08397B5D9814",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "BDAA3ED9E994EAC399EEDF436242E4EC1A7C4E27" : "Flypostr-iOS\/",
-    "78BC981234DC9ACF745E820B97CE28D46F6D69E7" : "geofire-objc\/"
+    "78BC981234DC9ACF745E820B97CE28D46F6D69E7" : "geofire-objc\/",
+    "82570B6D42E6BD44586ADAC3795CFCD033370E82" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Flypostr-iOS",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -20,6 +22,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/firebase\/geofire-objc.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78BC981234DC9ACF745E820B97CE28D46F6D69E7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/192.168.0.190\/home\/simon\/src\/fabsy_andr\/.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "82570B6D42E6BD44586ADAC3795CFCD033370E82"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/christianschweig\/Flypostr-iOS.git",

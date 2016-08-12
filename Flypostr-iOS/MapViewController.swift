@@ -45,9 +45,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.showAnnotations(annoArray, animated: true)
     }
     
+    func showNewPin(location: CLLocation) {
+        let annoItem = MKPointAnnotation()
+        annoItem.coordinate = location.coordinate
+        self.mapView.addAnnotation(annoItem)
+    }
+    
     
     @IBAction func onAdd(sender: AnyObject) {
-        print("hallo")
+        //show window
+        
         let annotation = MKPointAnnotation()
         annotation.title = "Title"
         annotation.subtitle = "Subtitle"
@@ -81,21 +88,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //TODO only make a query (i.e. requests) if new location is significantly different to old location
         
-        let location = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
+        let userLocation = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
         let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
         
         //Radius hardcoded to 600 meters
-        var circleQuery = geoFire.queryAtLocation(location, withRadius: 100.00)
+        //var circleQuery = geoFire.queryAtLocation(userLocation, withRadius: 100.00)
         
         let span = MKCoordinateSpanMake(0.800, 0.800)
-        let region = MKCoordinateRegionMake(location.coordinate, span)
+        let region = MKCoordinateRegionMake(userLocation.coordinate, span)
         var regionQuery = geoFire.queryWithRegion(region)
         
         var queryHandleEntered = regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
             print("Key '\(key)' entered the search area and is at location '\(location)'")
+            var found = false
+            for item in self.array {
+                if (item as! CLLocation).coordinate.longitude == location.coordinate.longitude && (item as! CLLocation).coordinate.latitude == location.coordinate.latitude {
+                    found = true
+                    break
+                }
+            }
+            if !found {
+                self.array.addObject(location)
+                self.self.showNewPin(location)
+            }
+            /*
             if !self.array.containsObject(location) {
                 self.array.addObject(location)
             }
+            */
         })
         var queryHandleExited = regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
             print("Key '\(key)' exited the search area and is at location '\(location)'")
@@ -103,7 +123,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
         
         let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
-        NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
+        //NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
         
     }
     
