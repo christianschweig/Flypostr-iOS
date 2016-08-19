@@ -7,4 +7,4 @@ Benutzer können mit der App an beliebigen Orten virtuelle Pinnwände erstellen,
 Auf einer Karte oder mit einem Kompass können Pinnwände in der Umgebung gefunden werden.  
 Der genaue Inhalt wird am Hackathon von den Teilnehmern zusammen festgelegt. Jeder kann weitere Ideen einbringen und bei der Umsetzung mitmachen.  
 
-© itcc.li, 2016 
+© itcc.li 2016 
