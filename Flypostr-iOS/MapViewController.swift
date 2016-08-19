@@ -54,7 +54,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func onAdd(sender: AnyObject) {
         //show window
+        self.performSegueWithIdentifier("showAddView", sender: self)
         
+        /*
         let annotation = MKPointAnnotation()
         annotation.title = "Title"
         annotation.subtitle = "Subtitle"
@@ -79,6 +81,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 print("Saved location successfully!")
             }
         }
+        */
         
     }
     
@@ -125,6 +128,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
         //NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showAddView" {
+            print ("suck my dick")
+            var location = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
+            (segue.destinationViewController as! AddFlyPostrViewController).location = location
+        }
     }
     
 }

@@ -42,11 +42,90 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="o9p-I1-e4C" id="b4x-Vg-XJ1"/>
+                        <segue destination="Ra2-Ul-sBt" kind="show" identifier="showAddView" id="ypa-y7-mDg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEQ-7i-rB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2342" y="-140"/>
+            <point key="canvasLocation" x="2435" y="-140"/>
+        </scene>
+        <!--Add Fly Postr View Controller-->
+        <scene sceneID="OcJ-Qy-yZ1">
+            <objects>
+                <viewController id="Ra2-Ul-sBt" customClass="AddFlyPostrViewController" customModule="Flypostr_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qZn-vr-yWW"/>
+                        <viewControllerLayoutGuide type="bottom" id="ova-Qy-2FM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b6d-pX-tnH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kq0-xo-dYa">
+                                <rect key="frame" x="285" y="483" width="30" height="30"/>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="AddButtonClicked:" destination="Ra2-Ul-sBt" eventType="touchDown" id="4Wa-WI-pLr"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ZE-Er-5Im">
+                                <rect key="frame" x="175" y="224" width="395" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new Flypostr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhQ-gD-6oP">
+                                <rect key="frame" x="227" y="134" width="147" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vj-ox-fC0">
+                                <rect key="frame" x="42" y="227" width="38" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVq-Lb-KHR">
+                                <rect key="frame" x="25" y="303" width="74" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rA2-61-0lf">
+                                <rect key="frame" x="109" y="303" width="461" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="qHB-uK-eV3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="3ZE-Er-5Im" secondAttribute="trailing" constant="10" id="4D5-Mq-USb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rA2-61-0lf" secondAttribute="trailing" constant="10" id="6iI-yZ-Ifh"/>
+                            <constraint firstItem="3ZE-Er-5Im" firstAttribute="leading" secondItem="4vj-ox-fC0" secondAttribute="trailing" constant="10" id="LYa-Dg-Xig"/>
+                            <constraint firstItem="4vj-ox-fC0" firstAttribute="top" secondItem="qZn-vr-yWW" secondAttribute="bottom" constant="163" id="Nfz-H4-lDI"/>
+                            <constraint firstItem="ova-Qy-2FM" firstAttribute="top" secondItem="kq0-xo-dYa" secondAttribute="bottom" constant="43" id="QYF-XK-jZr"/>
+                            <constraint firstItem="3ZE-Er-5Im" firstAttribute="top" secondItem="hhQ-gD-6oP" secondAttribute="bottom" constant="69" id="QqN-Gy-8bh"/>
+                            <constraint firstItem="ZVq-Lb-KHR" firstAttribute="leading" secondItem="b6d-pX-tnH" secondAttribute="leadingMargin" constant="10" id="RBn-eE-OpK"/>
+                            <constraint firstItem="4vj-ox-fC0" firstAttribute="leading" secondItem="b6d-pX-tnH" secondAttribute="leadingMargin" constant="10" id="Ram-I9-gcw"/>
+                            <constraint firstItem="kq0-xo-dYa" firstAttribute="centerX" secondItem="b6d-pX-tnH" secondAttribute="centerX" id="Ubj-tv-4Kn"/>
+                            <constraint firstItem="hhQ-gD-6oP" firstAttribute="centerX" secondItem="b6d-pX-tnH" secondAttribute="centerX" id="VOq-Rd-ZGc"/>
+                            <constraint firstItem="rA2-61-0lf" firstAttribute="top" secondItem="3ZE-Er-5Im" secondAttribute="bottom" constant="45" id="dqq-yG-mfU"/>
+                            <constraint firstItem="ZVq-Lb-KHR" firstAttribute="top" secondItem="4vj-ox-fC0" secondAttribute="bottom" constant="55" id="eYQ-He-KSy"/>
+                            <constraint firstItem="rA2-61-0lf" firstAttribute="leading" secondItem="ZVq-Lb-KHR" secondAttribute="trailing" constant="5" id="gzQ-kV-rAE"/>
+                            <constraint firstItem="hhQ-gD-6oP" firstAttribute="top" secondItem="qZn-vr-yWW" secondAttribute="bottom" constant="70" id="ieR-9R-8uB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageTextField" destination="rA2-61-0lf" id="IND-KX-Z9r"/>
+                        <outlet property="nameTextField" destination="3ZE-Er-5Im" id="Xg3-lz-6zI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R30-yr-iMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3101" y="-160"/>
         </scene>
         <!--Liste-->
         <scene sceneID="R4r-qB-Gq3">
@@ -184,7 +263,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIX-Wn-FVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1530" y="1459"/>
+            <point key="canvasLocation" x="1562" y="1427"/>
         </scene>
     </scenes>
 </document>
