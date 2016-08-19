@@ -2,7 +2,7 @@
 //  MapViewController.swift
 //  Flypostr-iOS
 //
-//  Created by Christian Schweig on 30.07.16.
+//  Created by Christian Schweig on 19.08.16.
 //  Copyright © 2016 itcc. All rights reserved.
 //
 
