@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3863B5A91D682BE1006C60AA /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3863B5A81D682BE1006C60AA /* WelcomeViewController.swift */; };
 		387F86F41D4D25CE00A5BAD9 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 387F86EB1D4D25CE00A5BAD9 /* GeoFire.m */; };
 		387F86F51D4D25CE00A5BAD9 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 387F86ED1D4D25CE00A5BAD9 /* GFBase32Utils.m */; };
 		387F86F61D4D25CE00A5BAD9 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 387F86EF1D4D25CE00A5BAD9 /* GFGeoHash.m */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		2C8C2DC7BAE2D69FFC9C2BEF /* Pods_Flypostr_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flypostr_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3827526F1D4CEB7F00E77E56 /* Flypostr-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flypostr-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		3863B5A81D682BE1006C60AA /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		387F86E41D4D25CE00A5BAD9 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		387F86E51D4D25CE00A5BAD9 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
 		387F86E61D4D25CE00A5BAD9 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				38BC3CD71D4D34DC0055602B /* ListTableViewController.swift */,
 				3827526F1D4CEB7F00E77E56 /* Flypostr-iOS-Bridging-Header.h */,
 				38EC27391D67A64300BF8D6B /* AddFlyPostrViewController.swift */,
+				3863B5A81D682BE1006C60AA /* WelcomeViewController.swift */,
 			);
 			path = "Flypostr-iOS";
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			files = (
 				38F7B67A1D3180DA00E3FFE8 /* ViewController.swift in Sources */,
 				38EC273A1D67A64300BF8D6B /* AddFlyPostrViewController.swift in Sources */,
+				3863B5A91D682BE1006C60AA /* WelcomeViewController.swift in Sources */,
 				387F86F51D4D25CE00A5BAD9 /* GFBase32Utils.m in Sources */,
 				387F86F71D4D25CE00A5BAD9 /* GFGeoHashQuery.m in Sources */,
 				387F86F41D4D25CE00A5BAD9 /* GeoFire.m in Sources */,

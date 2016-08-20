@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuthUI
 //import GeoFire// comment when run on device, active when in simulator
 
 @UIApplicationMain
@@ -16,11 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
         return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String
+        return FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -44,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 
 }
 
