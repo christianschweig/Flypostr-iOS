@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-class LocationHandler : NSObject, CLLocationManagerDelegate, MKAnnotationView{
+class LocationHandler : NSObject, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     var locValue = CLLocationCoordinate2D()
