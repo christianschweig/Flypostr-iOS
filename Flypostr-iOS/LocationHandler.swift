@@ -62,6 +62,11 @@ class LocationHandler : NSObject, CLLocationManagerDelegate{
         
         let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
         NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
+        
+        let value = NSValue(MKCoordinate: self.locValue)
+        //dictionary["currentLocation"] = value
+        let locValue: NSDictionary = NSDictionary(object: value, forKey: "locValue")
+        NSNotificationCenter.defaultCenter().postNotificationName("refreshLocation", object: self, userInfo: locValue as [NSObject : AnyObject])
     }
 
     

@@ -15,21 +15,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
     var locValue = CLLocationCoordinate2D()
-    var array = NSMutableArray()
+    //var array = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         mapView.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.showPins(_:)), name:"refreshList", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.refreshLocation(_:)), name:"refreshLocation", object: nil)
     }
     
     func showPins(notification: NSNotification) {
+        var array = notification.userInfo!["myArray"] as! NSArray;
         var annoArray = [MKAnnotation]()
-        for item in self.array {
+        self.mapView.removeAnnotations(mapView.annotations)
+        for item in array {
             let annoItem = MKPointAnnotation()
             annoItem.coordinate = item.coordinate
             annoArray.append(annoItem)
@@ -37,12 +38,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.showAnnotations(annoArray, animated: true)
     }
     
-    func showNewPin(location: CLLocation) {
-        let annoItem = MKPointAnnotation()
-        annoItem.coordinate = location.coordinate
-        self.mapView.addAnnotation(annoItem)
+    func refreshLocation(notification: NSNotification) {
+        var test = notification.userInfo!["locValue"] as! NSValue
+        locValue = test.MKCoordinateValue
+        //locValue
     }
-    
     
     @IBAction func onAdd(sender: AnyObject) {
         //show window
@@ -60,27 +60,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
          annotationView.annotation = annotation
          annotationView.canShowCallout = true
          annotationView.enabled = true
-         
-         //var test =  //FromURL("https://flypostr-cd317.firebaseio.com/")
-         let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
-         let location = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
-         
-         geoFire.setLocation(location, forKey: "dummy") {
-         (error) in
-         if (error != nil) {
-         print("An error occured: \(error)")
-         } else {
-         print("Saved location successfully!")
-         }
-         }
-         */
+        */
         
     }
-    
         
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showAddView" {
-            print ("suck my dick")
             var location = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
             (segue.destinationViewController as! AddFlyPostrViewController).location = location
         }

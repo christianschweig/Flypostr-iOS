@@ -23,6 +23,7 @@ class ListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 //        let sendingObject = Dictionary<NSObject, AnyObject>()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ListTableViewController.refreshList(_:)), name:"refreshList", object: nil)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +38,7 @@ class ListTableViewController: UITableViewController {
         self.array = NSMutableArray(array: myArray)
         tableView.reloadData()
     }
+
     
     // MARK: - Table view data source
 
