@@ -10,11 +10,11 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-class LocationHandler : NSObject, CLLocationManagerDelegate{
+class LocationHandler: NSObject, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
-    var locValue = CLLocationCoordinate2D()
-    var array = NSMutableArray()
+    var regionQuery = GFRegionQuery()
+    var keyArray = NSMutableArray()
     let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geofire"))
     
     override init() {
@@ -26,49 +26,50 @@ class LocationHandler : NSObject, CLLocationManagerDelegate{
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var newLocValue = manager.location!.coordinate
         
-        //TODO only make a query (i.e. requests) if new location is significantly different to old location
-        
-        //Radius hardcoded to 600 meters
-        //var circleQuery = geoFire.queryAtLocation(userLocation, withRadius: 100.00)
-        let userLocation = CLLocation(latitude: newLocValue.latitude, longitude: newLocValue.longitude)
+        let dummyLocation = CLLocation()
         let span = MKCoordinateSpanMake(0.800, 0.800)
-        let region = MKCoordinateRegionMake(userLocation.coordinate, span)
-        var regionQuery = geoFire.queryWithRegion(region)
+        let region = MKCoordinateRegionMake(dummyLocation.coordinate, span)
+        self.regionQuery = geoFire.queryWithRegion(region)
         
-        var queryHandleEntered = regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
-
+        self.regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+            
             var found = false
-            for item in self.array {
-                if (item as! CLLocation).coordinate.longitude == location.coordinate.longitude && (item as! CLLocation).coordinate.latitude == location.coordinate.latitude {
+            
+            for item in self.keyArray {
+                if (item as! String == key) {
                     found = true
                     break
                 }
             }
             if !found {
-                self.array.addObject(location)
-                let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
+                self.keyArray.addObject(key)
+                let theInfo: NSDictionary = NSDictionary(object: self.keyArray, forKey: "myArray")
                 NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
             }
         })
-        var queryHandleExited = regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
+        
+        self.regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
             print("Key '\(key)' exited the search area and is at location '\(location)'")
-            self.array.removeObject(location)
-            self.array.addObject(location)
-            let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
+            self.keyArray.removeObject(key)
+            let theInfo: NSDictionary = NSDictionary(object: self.keyArray, forKey: "myArray")
             NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
         })
         
-        let value = NSValue(MKCoordinate: self.locValue)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let newLocation = manager.location!.coordinate
+        
+        let userLocation = CLLocation(latitude: newLocation.latitude, longitude: newLocation.longitude)
+        let span = MKCoordinateSpanMake(0.800, 0.800)
+        let region = MKCoordinateRegionMake(userLocation.coordinate, span)
+        self.regionQuery.region = region
+        
+        let value = NSValue(MKCoordinate: newLocation)
         let locValue: NSDictionary = NSDictionary(object: value, forKey: "locValue")
         NSNotificationCenter.defaultCenter().postNotificationName("refreshLocation", object: self, userInfo: locValue as [NSObject : AnyObject])
-        
-        self.locValue = newLocValue
     }
-
     
 }

@@ -17,6 +17,8 @@
 		38C1A4711D4CE253006142C3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C1A4701D4CE253006142C3 /* MapViewController.swift */; };
 		38D372671D686D280015B46B /* MeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D372661D686D280015B46B /* MeTableViewController.swift */; };
 		38EC273A1D67A64300BF8D6B /* AddFlyPostrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EC27391D67A64300BF8D6B /* AddFlyPostrViewController.swift */; };
+		38F45D641D68A91800DB1C0E /* NewPostrTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F45D631D68A91800DB1C0E /* NewPostrTableViewController.swift */; };
+		38F45D661D68FAC300DB1C0E /* PostrAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F45D651D68FAC300DB1C0E /* PostrAnnotation.swift */; };
 		38F7B6781D3180DA00E3FFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */; };
 		38F7B67A1D3180DA00E3FFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F7B6791D3180DA00E3FFE8 /* ViewController.swift */; };
 		38F7B67D1D3180DA00E3FFE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B67B1D3180DA00E3FFE8 /* Main.storyboard */; };
@@ -50,6 +52,8 @@
 		38C1A4701D4CE253006142C3 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		38D372661D686D280015B46B /* MeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeTableViewController.swift; sourceTree = "<group>"; };
 		38EC27391D67A64300BF8D6B /* AddFlyPostrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFlyPostrViewController.swift; sourceTree = "<group>"; };
+		38F45D631D68A91800DB1C0E /* NewPostrTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostrTableViewController.swift; sourceTree = "<group>"; };
+		38F45D651D68FAC300DB1C0E /* PostrAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostrAnnotation.swift; sourceTree = "<group>"; };
 		38F7B6741D3180D900E3FFE8 /* Flypostr-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flypostr-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38F7B6791D3180DA00E3FFE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				38EC27391D67A64300BF8D6B /* AddFlyPostrViewController.swift */,
 				3863B5A81D682BE1006C60AA /* WelcomeViewController.swift */,
 				38D372661D686D280015B46B /* MeTableViewController.swift */,
+				38F45D631D68A91800DB1C0E /* NewPostrTableViewController.swift */,
+				38F45D651D68FAC300DB1C0E /* PostrAnnotation.swift */,
 			);
 			path = "Flypostr-iOS";
 			sourceTree = "<group>";
@@ -296,12 +302,14 @@
 				38F7B67A1D3180DA00E3FFE8 /* ViewController.swift in Sources */,
 				38EC273A1D67A64300BF8D6B /* AddFlyPostrViewController.swift in Sources */,
 				38D372671D686D280015B46B /* MeTableViewController.swift in Sources */,
+				38F45D641D68A91800DB1C0E /* NewPostrTableViewController.swift in Sources */,
 				3863B5A91D682BE1006C60AA /* WelcomeViewController.swift in Sources */,
 				387F86F51D4D25CE00A5BAD9 /* GFBase32Utils.m in Sources */,
 				387F86F71D4D25CE00A5BAD9 /* GFGeoHashQuery.m in Sources */,
 				387F86F41D4D25CE00A5BAD9 /* GeoFire.m in Sources */,
 				38C1A4711D4CE253006142C3 /* MapViewController.swift in Sources */,
 				F4A681E51D6849B0000A0721 /* LocationHandler.swift in Sources */,
+				38F45D661D68FAC300DB1C0E /* PostrAnnotation.swift in Sources */,
 				387F86F61D4D25CE00A5BAD9 /* GFGeoHash.m in Sources */,
 				38BC3CD81D4D34DC0055602B /* ListTableViewController.swift in Sources */,
 				38F7B6781D3180DA00E3FFE8 /* AppDelegate.swift in Sources */,
