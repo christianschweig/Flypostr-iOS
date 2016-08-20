@@ -22,6 +22,7 @@
 		38F7B6821D3180DA00E3FFE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B6801D3180DA00E3FFE8 /* LaunchScreen.storyboard */; };
 		38F7B68C1D3183B100E3FFE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38F7B68B1D3183B100E3FFE8 /* GoogleService-Info.plist */; };
 		7F1308E8382A6E46C0514AB3 /* Pods_Flypostr_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8C2DC7BAE2D69FFC9C2BEF /* Pods_Flypostr_iOS.framework */; };
+		F4A681E51D6849B0000A0721 /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A681E41D6849B0000A0721 /* LocationHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		38F7B68B1D3183B100E3FFE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		41FE56501B7A1E708ABB7C46 /* Pods-Flypostr-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flypostr-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		C85923C9B276E699EC78348A /* Pods-Flypostr-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flypostr-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flypostr-iOS/Pods-Flypostr-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		F4A681E41D6849B0000A0721 /* LocationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			children = (
 				387F86E21D4D25CE00A5BAD9 /* GeoFire */,
 				38F7B6771D3180DA00E3FFE8 /* AppDelegate.swift */,
+				F4A681E41D6849B0000A0721 /* LocationHandler.swift */,
 				38F7B6791D3180DA00E3FFE8 /* ViewController.swift */,
 				38F7B67B1D3180DA00E3FFE8 /* Main.storyboard */,
 				38F7B67E1D3180DA00E3FFE8 /* Assets.xcassets */,
@@ -290,6 +293,7 @@
 				387F86F71D4D25CE00A5BAD9 /* GFGeoHashQuery.m in Sources */,
 				387F86F41D4D25CE00A5BAD9 /* GeoFire.m in Sources */,
 				38C1A4711D4CE253006142C3 /* MapViewController.swift in Sources */,
+				F4A681E51D6849B0000A0721 /* LocationHandler.swift in Sources */,
 				387F86F61D4D25CE00A5BAD9 /* GFGeoHash.m in Sources */,
 				38BC3CD81D4D34DC0055602B /* ListTableViewController.swift in Sources */,
 				38F7B6781D3180DA00E3FFE8 /* AppDelegate.swift in Sources */,

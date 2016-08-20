@@ -15,11 +15,12 @@ import FirebaseDatabase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var locationHandler : LocationHandler?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        locationHandler = LocationHandler()
         return true
     }
 

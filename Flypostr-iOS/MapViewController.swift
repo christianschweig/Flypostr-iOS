@@ -15,21 +15,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let locationManager = CLLocationManager()
+    
     var locValue = CLLocationCoordinate2D()
     var array = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-        
+
         mapView.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.showPins(_:)), name:"refreshList", object: nil)
@@ -85,51 +77,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locValue = manager.location!.coordinate
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
         
-        //TODO only make a query (i.e. requests) if new location is significantly different to old location
-        
-        let userLocation = CLLocation(latitude: self.locValue.latitude, longitude: self.locValue.longitude)
-        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference())
-        
-        //Radius hardcoded to 600 meters
-        //var circleQuery = geoFire.queryAtLocation(userLocation, withRadius: 100.00)
-        
-        let span = MKCoordinateSpanMake(0.800, 0.800)
-        let region = MKCoordinateRegionMake(userLocation.coordinate, span)
-        var regionQuery = geoFire.queryWithRegion(region)
-        
-        var queryHandleEntered = regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
-            print("Key '\(key)' entered the search area and is at location '\(location)'")
-            var found = false
-            for item in self.array {
-                if (item as! CLLocation).coordinate.longitude == location.coordinate.longitude && (item as! CLLocation).coordinate.latitude == location.coordinate.latitude {
-                    found = true
-                    break
-                }
-            }
-            if !found {
-                self.array.addObject(location)
-                self.self.showNewPin(location)
-            }
-            /*
-             if !self.array.containsObject(location) {
-             self.array.addObject(location)
-             }
-             */
-        })
-        var queryHandleExited = regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
-            print("Key '\(key)' exited the search area and is at location '\(location)'")
-            self.array.removeObject(location)
-        })
-        
-        let theInfo: NSDictionary = NSDictionary(object: self.array, forKey: "myArray")
-        //NSNotificationCenter.defaultCenter().postNotificationName("refreshList", object: self, userInfo: theInfo as [NSObject : AnyObject])
-        
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showAddView" {
             print ("suck my dick")

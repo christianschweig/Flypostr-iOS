@@ -18,6 +18,8 @@ class AddFlyPostrViewController: UIViewController {
     
     var location : CLLocation?
     
+    var userId = "000001"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
@@ -41,13 +43,13 @@ class AddFlyPostrViewController: UIViewController {
         // Create a reference to a Firebase location
         var myRootRef = FIRDatabase.database().reference()
         // Write data to Firebase
-        let key = myRootRef.child("postingsDetail").childByAutoId().key
-        let post = ["title": nameTextField.text!, "author": "user01","thumbnail": "-id-thumbnail-001","createTime": formatter.stringFromDate(now), "lastActivityTime": formatter.stringFromDate(now)]
-        let childUpdates = ["/postingsDetail/\(key)": post]
+        let key = myRootRef.child("postings").childByAutoId().key
+        let post : [NSObject : AnyObject] = ["authorId": userId, "commentCount": "0","createdAt": formatter.stringFromDate(now), "imageId": "-id-image-001", "lat": location!.coordinate.latitude, "lng" : location!.coordinate.longitude, "modifiedAt": formatter.stringFromDate(now), "text": messageTextField.text!, "title": nameTextField.text!, "viewCount": "0"]
+        let childUpdates = ["/postings/\(key)": post]
         
         myRootRef.updateChildValues(childUpdates)
         
-        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geoLocation"))
+        let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geofire"))
         
         geoFire.setLocation(location, forKey: key) {
             (error) in
