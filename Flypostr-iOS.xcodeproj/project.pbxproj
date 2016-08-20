@@ -458,7 +458,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "li.itcc.Flypostr-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = li.itcc.flypostr2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Flypostr-iOS/Flypostr-iOS-Bridging-Header.h";
@@ -512,7 +512,7 @@
 					"-framework",
 					"\"SystemConfiguration\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "li.itcc.Flypostr-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = li.itcc.flypostr2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Flypostr-iOS/Flypostr-iOS-Bridging-Header.h";

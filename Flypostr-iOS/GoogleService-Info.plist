@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>467332953677-kijsjnb11m66sqt3kl8blt3f56s64eqd.apps.googleusercontent.com</string>
+	<string>467332953677-ifb7ngi5stdlhdilmjsrqek6bvg3uvc2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.467332953677-kijsjnb11m66sqt3kl8blt3f56s64eqd</string>
+	<string>com.googleusercontent.apps.467332953677-ifb7ngi5stdlhdilmjsrqek6bvg3uvc2</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAfVJCt1xytlPgDzOTZ9hNMHjCoCLSMjVk</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>li.itcc.Flypostr-iOS</string>
+	<string>li.itcc.flypostr2</string>
 	<key>PROJECT_ID</key>
 	<string>flypostr-cd317</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:467332953677:ios:b0bd81cc965cf4b6</string>
+	<string>1:467332953677:ios:da855473c758a922</string>
 	<key>DATABASE_URL</key>
 	<string>https://flypostr-cd317.firebaseio.com</string>
 </dict>
