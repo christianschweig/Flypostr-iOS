@@ -44,6 +44,8 @@ class WelcomeViewController: UIViewController, FIRAuthUIDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        print("photourl")
+        print(auth?.currentUser?.photoURL)
         if ((auth?.currentUser?.email) != nil) {
             self.performSegueWithIdentifier("go", sender: nil)
         } else {
