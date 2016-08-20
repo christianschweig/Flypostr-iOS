@@ -79,6 +79,7 @@ DEPENDENCIES:
   - Firebase (~> 3.3.0)
   - Firebase/Database
   - FirebaseUI
+  - FirebaseUI/Auth
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -99,6 +100,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
 
-PODFILE CHECKSUM: 89ae638d3826a5bb105e4562f4677032f71cafab
+PODFILE CHECKSUM: 3ee2650d55a60b18c08ae238321a93769561b8bf
 
 COCOAPODS: 1.0.1

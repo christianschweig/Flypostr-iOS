@@ -9,5 +9,6 @@ target 'Flypostr-iOS' do
   pod 'Firebase', '~> 3.3.0'
   pod 'Firebase/Database'
   pod 'FirebaseUI'
+  pod 'FirebaseUI/Auth'
 
 end

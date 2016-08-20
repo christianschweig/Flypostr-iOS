@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gbU-Yg-LHE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KSZ-xM-qG7">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -53,7 +53,7 @@
         <scene sceneID="R4r-qB-Gq3">
             <objects>
                 <navigationController id="zHC-wx-BbH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" id="SYJ-Qm-c4n"/>
+                    <tabBarItem key="tabBarItem" title="List" image="List" id="SYJ-Qm-c4n"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MHb-1N-svt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -70,7 +70,7 @@
         <scene sceneID="OC4-Sa-uDg">
             <objects>
                 <navigationController id="5vN-uv-6Ee" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="UbD-Xh-Dxg"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="Globe-Grid" id="UbD-Xh-Dxg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Faz-we-WCc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -103,14 +103,14 @@
                                             <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rkp-RX-Wvx">
                                             <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -148,6 +148,36 @@
             </objects>
             <point key="canvasLocation" x="2342" y="1459"/>
         </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="CSH-8y-mr4">
+            <objects>
+                <viewController id="KSZ-xM-qG7" customClass="WelcomeViewController" customModule="Flypostr_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PKc-PJ-Jc9"/>
+                        <viewControllerLayoutGuide type="bottom" id="MKa-g7-Rq9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y6g-Ih-Hou">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ow-Kj-WBn">
+                                <rect key="frame" x="277" y="285" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="onClick:" destination="KSZ-xM-qG7" eventType="touchUpInside" id="3K4-YI-lKi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="gbU-Yg-LHE" kind="showDetail" identifier="go" animates="NO" action="showViewController:sender:" id="1wx-il-Ym2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="47w-QI-SyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23" y="623"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3EH-F5-ILX">
             <objects>
@@ -172,7 +202,7 @@
         <scene sceneID="oTv-pQ-fkb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iSh-pG-tnU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Me" id="v8q-xK-f33"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="ID-Card" id="v8q-xK-f33"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NR7-Ej-qSM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -214,19 +244,19 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a new Flypostr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTj-8p-Q13">
                                 <rect key="frame" x="227" y="134" width="147" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-fh-m2B">
                                 <rect key="frame" x="42" y="227" width="38" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwd-7U-CrI">
                                 <rect key="frame" x="25" y="303" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FbD-Qw-0G5">
@@ -266,4 +296,9 @@
             <point key="canvasLocation" x="3157" y="-140"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Globe-Grid" width="25" height="25"/>
+        <image name="ID-Card" width="25" height="25"/>
+        <image name="List" width="25" height="25"/>
+    </resources>
 </document>
