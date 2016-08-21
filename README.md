@@ -14,6 +14,8 @@ Mit Flypostr können an beliebigen Orten Nachrichten hinterlassen werden, zum Be
 - Entdecke und berichte über besuchte Orte, Restaurants, Cafés und Ausflugsziele
 - Erhalte durch die Flypostr-Community Antworten auf deine Fragen zu den Orten
 
+## Entwicklung
+
 ### Bereits implementiert
 
 - Login (Google/Facebook/Twitter/Email)
