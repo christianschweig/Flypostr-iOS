@@ -15,14 +15,20 @@ class PostrAnnotation: NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     var coordinate: CLLocationCoordinate2D
+    var authorId: String?
+    var author: String?
     var imageId: String?
+    var createdAt: String?
     
-    init(key: String, title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D, imageId: String?) {
+    init(key: String, title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D, authorId: String?, author: String?, imageId: String?, createdAt: String?) {
         self.key = key
         self.title = title
         self.subtitle = subtitle
         self.coordinate = coordinate
+        self.authorId = authorId
+        self.author = author
         self.imageId = imageId
+        self.createdAt = createdAt
     }
     
 }

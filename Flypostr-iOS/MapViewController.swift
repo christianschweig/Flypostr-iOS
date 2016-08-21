@@ -23,9 +23,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var annotationArray = [PostrAnnotation]()
     let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geofire"))
     let postings = FIRDatabase.database().referenceWithPath("postings")
+    var postrToPass = PostrAnnotation(key: "", title: "", subtitle: "", coordinate: CLLocation().coordinate, authorId: "", author: "", imageId: "", createdAt: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let logoImageView = UIImageView(image: UIImage(named: "flypostr"))
+//        self.navigationItem.titleView = logoImageView
         
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
@@ -60,13 +64,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     } else if (location != nil) {
                         print("Location for \(key) is [\(location.coordinate.latitude), \(location.coordinate.longitude)]")
                         
-                        let postrAnno = PostrAnnotation(key: key, title: "", subtitle: "", coordinate: location.coordinate, imageId: "")
+                        let postrAnno = PostrAnnotation(key: key, title: "", subtitle: "", coordinate: location.coordinate, authorId: "", author: "", imageId: "", createdAt: "")
                         
                         self.postings.child(key).observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
                             let postDict = snapshot.value as! [String : AnyObject]
                             postrAnno.title = postDict["title"] as! String?
                             postrAnno.subtitle = postDict["text"] as! String?
+                            postrAnno.authorId = postDict["authorId"] as! String?
+                            postrAnno.author = postDict["author"] as! String?
                             postrAnno.imageId = postDict["imageId"] as! String?
+                            postrAnno.createdAt = postDict["createdAt"] as! String?
                             self.mapView.addAnnotation(postrAnno)
                             self.annotationArray.append(postrAnno)
                         })
@@ -91,8 +98,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
         
         mapView.delegate = self
-        
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MapViewController.showPins(_:)), name:"refreshList", object: nil)
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -118,7 +123,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let storage = FIRStorage.storage()
                 let storageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/thumbnails/")
                 let imageRef = storageRef.child(postrAnno.imageId!)
-                imageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+                imageRef.dataWithMaxSize(1 * 2048 * 2048) { (data, error) -> Void in
                     if (error != nil) {
                         print("Error while downloading some Firebase Storage")
                     } else {
@@ -129,7 +134,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     }
                 }
                 
-                let btn = UIButton(type: .DetailDisclosure)
+                let btn = UIButton(type: UIButtonType.DetailDisclosure)
                 annotationView!.rightCalloutAccessoryView = btn
             } else {
                 annotationView!.annotation = annotation
@@ -141,9 +146,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation = view.annotation as! PostrAnnotation
-        let ac = UIAlertController(title: annotation.title, message: annotation.subtitle, preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(ac, animated: true, completion: nil)
+        self.postrToPass = annotation
+        self.performSegueWithIdentifier("showDetails", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -151,6 +155,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let location = self.currentPosition
             let targetNavContr = segue.destinationViewController as! UINavigationController
             (targetNavContr.childViewControllers[0] as! NewPostrTableViewController).location = location
+        } else if segue.identifier == "showDetails" {
+            let targetController = segue.destinationViewController as! DetailTableViewController
+            targetController.postr = self.postrToPass
         }
     }
     

@@ -27,7 +27,7 @@ class WelcomeViewController: UIViewController, FIRAuthUIDelegate {
         self.authUI?.delegate = self
         
         let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
-        let kFacebookAppID = ""
+        let kFacebookAppID = "174114339679066"
         let providers: [FIRAuthProviderUI] = [FIRGoogleAuthUI(clientID: kGoogleAppClientID)!, FIRFacebookAuthUI(appID: kFacebookAppID)!]
         self.authUI?.signInProviders = providers
         
