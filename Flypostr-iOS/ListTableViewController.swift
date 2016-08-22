@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class ListTableViewController: UITableViewController, CLLocationManagerDelegate  {
-
+    
     let locationManager = CLLocationManager()
     var currentPosition = CLLocationCoordinate2D()
     var regionQuery = GFRegionQuery()
@@ -89,7 +89,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
             self.keyArray.removeObject(key)
         })
     }
-
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = manager.location!.coordinate
         self.currentPosition = newLocation
@@ -102,17 +102,17 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.postingsArray.count
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
         
@@ -120,15 +120,17 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         cell.detailTextLabel!.text = self.postingsArray[indexPath.row].subtitle
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/thumbnails/")
-        let imageRef = storageRef.child(self.postingsArray[indexPath.row].imageId!)
-        imageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
-            if (error != nil) {
-                print("Error while downloading some Firebase Storage")
-            } else {
-                let image: UIImage! = UIImage(data: data!)
-                //let imageView = UIImageView(image: image)
-                //imageView.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
-                cell.imageView?.image = image
+        if (self.postingsArray[indexPath.row].imageId != nil) {
+            let imageRef = storageRef.child(self.postingsArray[indexPath.row].imageId!)
+            imageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+                if (error != nil) {
+                    print("Error while downloading some Firebase Storage")
+                } else {
+                    let image: UIImage! = UIImage(data: data!)
+                    //let imageView = UIImageView(image: image)
+                    //imageView.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+                    cell.imageView?.image = image
+                }
             }
         }
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -147,5 +149,5 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
             targetController.postr = self.postrToPass
         }
     }
-
+    
 }

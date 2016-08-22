@@ -28,8 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let logoImageView = UIImageView(image: UIImage(named: "flypostr"))
-//        self.navigationItem.titleView = logoImageView
+        //        let logoImageView = UIImageView(image: UIImage(named: "flypostr"))
+        //        self.navigationItem.titleView = logoImageView
         
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
@@ -122,18 +122,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let postrAnno = annotation as! PostrAnnotation
                 let storage = FIRStorage.storage()
                 let storageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/thumbnails/")
-                let imageRef = storageRef.child(postrAnno.imageId!)
-                imageRef.dataWithMaxSize(1 * 2048 * 2048) { (data, error) -> Void in
-                    if (error != nil) {
-                        print("Error while downloading some Firebase Storage")
-                    } else {
-                        let image: UIImage! = UIImage(data: data!)
-                        let imageView = UIImageView(image: image)
-                        imageView.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
-                        annotationView?.leftCalloutAccessoryView = imageView
+                print(postrAnno.imageId)
+                if (postrAnno.imageId != nil) {
+                    let imageRef = storageRef.child(postrAnno.imageId!)
+                    imageRef.dataWithMaxSize(1 * 2048 * 2048) { (data, error) -> Void in
+                        if (error != nil) {
+                            print("Error while downloading some Firebase Storage")
+                        } else {
+                            let image: UIImage! = UIImage(data: data!)
+                            let imageView = UIImageView(image: image)
+                            imageView.frame = CGRect(x: 0, y: 0, width: 70, height: 70)
+                            annotationView?.leftCalloutAccessoryView = imageView
+                        }
                     }
                 }
-                
                 let btn = UIButton(type: UIButtonType.DetailDisclosure)
                 annotationView!.rightCalloutAccessoryView = btn
             } else {
