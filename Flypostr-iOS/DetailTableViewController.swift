@@ -24,12 +24,12 @@ class DetailTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = self.postr.title
-        let storageRef = self.storage.referenceForURL("gs://flypostr-cd317.appspot.com/images/")
+        let storageRef = self.storage.reference(forURL: "gs://flypostr-cd317.appspot.com/images/")
         if (self.postr.imageId != nil) {
             let imageRef = storageRef.child(self.postr.imageId!)
-            imageRef.dataWithMaxSize(1 * 2048 * 2048) { (data, error) -> Void in
+            imageRef.data(withMaxSize: 1 * 2048 * 2048) { (data, error) -> Void in
                 if (error != nil) {
                     print("Error: \(error)")
                 } else {

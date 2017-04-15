@@ -20,9 +20,9 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
     
     var location: CLLocationCoordinate2D?
     var newMedia: Bool?
-    let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geofire"))
-    let postings = FIRDatabase.database().referenceWithPath("postings")
-    let users = FIRDatabase.database().referenceWithPath("users")
+    let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference(withPath: "geofire"))
+    let postings = FIRDatabase.database().reference(withPath: "postings")
+    let users = FIRDatabase.database().reference(withPath: "users")
     var image = UIImage()
     
     override func viewDidLoad() {
@@ -30,57 +30,57 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
         newPostrText.becomeFirstResponder()
     }
     
-    @IBAction func onChangeImage(sender: AnyObject) {
-        let changeImageMenu = UIAlertController(title: nil, message: "Select image from", preferredStyle: .ActionSheet)
-        let cameraSelect = UIAlertAction(title: "Camera", style: .Default, handler: {
+    @IBAction func onChangeImage(_ sender: AnyObject) {
+        let changeImageMenu = UIAlertController(title: nil, message: "Select image from", preferredStyle: .actionSheet)
+        let cameraSelect = UIAlertAction(title: "Camera", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Camera Select")
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                imagePicker.sourceType = UIImagePickerControllerSourceType.camera
                 //imagePicker.mediaTypes = [kUTTypeImage as NSString]
                 imagePicker.allowsEditing = true
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
                 self.newMedia = true
             } else {
                 NSLog("Camera Select is not available on this device.")
             }
         })
-        let cameraRollSelect = UIAlertAction(title: "Camera Roll", style: .Default, handler: {
+        let cameraRollSelect = UIAlertAction(title: "Camera Roll", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Camera Roll Select")
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
                 //imagePicker.mediaTypes = [kUTTypeImage as NSString]
                 imagePicker.allowsEditing = true
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
                 self.newMedia = false
             } else {
                 NSLog("Camera Roll Select is not available on this device.")
             }
         })
-        let cancelSelect = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelSelect = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         changeImageMenu.addAction(cameraSelect)
         changeImageMenu.addAction(cameraRollSelect)
         changeImageMenu.addAction(cancelSelect)
-        presentViewController(changeImageMenu, animated: true, completion: nil)
+        present(changeImageMenu, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        picker.dismiss(animated: true, completion: nil)
         self.image = image
         newPostrImage.image = self.image
     }
     
-    @IBAction func onSave(sender: AnyObject) {
+    @IBAction func onSave(_ sender: AnyObject) {
         
-        let now = NSDate()
-        let formatter = NSDateFormatter()
+        let now = Date()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        formatter.timeZone = NSTimeZone(name: "Europe/Vaduz")
+        formatter.timeZone = TimeZone(identifier: "Europe/Vaduz")
         
         //Re-size Images
         let originalImage = self.image
@@ -90,13 +90,13 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
         if (originalImage.size.height > 0) {
             let destinationSizeImage: CGSize = CGSize(width: 900, height: 900)
             UIGraphicsBeginImageContext(destinationSizeImage)
-            originalImage.drawInRect(CGRectMake(0, 0, destinationSizeImage.width, destinationSizeImage.height))
+            originalImage.draw(in: CGRect(x: 0, y: 0, width: destinationSizeImage.width, height: destinationSizeImage.height))
             let imageImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext()
             
             let destinationSizeThumbnail: CGSize = CGSize(width: 124, height: 124)
             UIGraphicsBeginImageContext(destinationSizeThumbnail)
-            originalImage.drawInRect(CGRectMake(0, 0, destinationSizeThumbnail.width, destinationSizeThumbnail.height))
+            originalImage.draw(in: CGRect(x: 0, y: 0, width: destinationSizeThumbnail.width, height: destinationSizeThumbnail.height))
             let thumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext()
             
@@ -104,16 +104,16 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
             let storage = FIRStorage.storage()
             let metadata = FIRStorageMetadata()
             metadata.contentType = "image/jpeg"
-            let imageUuid = NSUUID().UUIDString
+            let imageUuid = UUID().uuidString
             let imageFileName = "/" + imageUuid + ".jpg"
             imageId = imageUuid + ".jpg"
             
-            let imageData: NSData = UIImageJPEGRepresentation(imageImage, 1.0)!
-            let imagesStorageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/images/")
+            let imageData: Data = UIImageJPEGRepresentation(imageImage!, 1.0)!
+            let imagesStorageRef = storage.reference(forURL: "gs://flypostr-cd317.appspot.com/images/")
             let imageRef = imagesStorageRef.child(imageFileName)
             
             // Upload the file to the path "images/rivers.jpg"
-            /*let uploadTask = */imageRef.putData(imageData, metadata: metadata) { metadata, error in
+            /*let uploadTask = */imageRef.put(imageData, metadata: metadata) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                 } else {
@@ -122,12 +122,12 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
                 }
             }
             
-            let thumbnailData: NSData = UIImageJPEGRepresentation(thumbnailImage, 1.0)!
-            let thumbnailsStorageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/thumbnails/")
+            let thumbnailData: Data = UIImageJPEGRepresentation(thumbnailImage!, 1.0)!
+            let thumbnailsStorageRef = storage.reference(forURL: "gs://flypostr-cd317.appspot.com/thumbnails/")
             let thumbnailRef = thumbnailsStorageRef.child(imageFileName)
             
             // Upload the file to the path "images/rivers.jpg"
-            /*let uploadTask = */thumbnailRef.putData(thumbnailData, metadata: metadata) { metadata, error in
+            /*let uploadTask = */thumbnailRef.put(thumbnailData, metadata: metadata) { metadata, error in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                 } else {
@@ -139,26 +139,26 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
         
         let userId = FIRAuth.auth()?.currentUser?.uid
         var userName = ""
-        self.users.child(userId!).observeSingleEventOfType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        self.users.child(userId!).observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
             if let _ = snapshot.value as? NSNull {
                 userName = (FIRAuth.auth()?.currentUser?.displayName)!
                 
                 //Save Posting
                 let key = self.postings.childByAutoId().key
                 print("unten \(userName)")
-                let post: [NSObject : AnyObject] = ["authorId": userId!, "author": userName, /*"commentCount": "0", */"createdAt": formatter.stringFromDate(now), "imageId": imageId, "lat": self.location!.latitude, "lng" : self.location!.longitude, /*"modifiedAt": formatter.stringFromDate(now), */"text": self.newPostrMessage.text!, "title": self.newPostrText.text!/*, "viewCount": "0"*/]
+                let post: [AnyHashable: Any] = ["authorId": userId!, "author": userName, /*"commentCount": "0", */"createdAt": formatter.string(from: now), "imageId": imageId, "lat": self.location!.latitude, "lng" : self.location!.longitude, /*"modifiedAt": formatter.stringFromDate(now), */"text": self.newPostrMessage.text!, "title": self.newPostrText.text!/*, "viewCount": "0"*/]
                 let childUpdates = ["/\(key)": post]
                 self.postings.updateChildValues(childUpdates)
                 
                 //Save GeoFire
                 let oLocation = CLLocation(latitude: (self.location?.latitude)!, longitude: (self.location?.longitude)!)
-                self.geoFire.setLocation(oLocation, forKey: key) {
+                self.geoFire?.setLocation(oLocation, forKey: key) {
                     (error) in
                     if (error != nil) {
-                        let ac = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .Alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        let ac = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     } else {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
                 
@@ -169,19 +169,19 @@ class NewPostrTableViewController: UITableViewController, UIImagePickerControlle
                 //Save Posting
                 let key = self.postings.childByAutoId().key
                 print("unten \(userName)")
-                let post: [NSObject : AnyObject] = ["authorId": userId!, "author": userName, /*"commentCount": "0", */"createdAt": formatter.stringFromDate(now), "imageId": imageId, "lat": self.location!.latitude, "lng" : self.location!.longitude, /*"modifiedAt": formatter.stringFromDate(now), */"text": self.newPostrMessage.text!, "title": self.newPostrText.text!/*, "viewCount": "0"*/]
+                let post: [AnyHashable: Any] = ["authorId": userId!, "author": userName, /*"commentCount": "0", */"createdAt": formatter.string(from: now), "imageId": imageId, "lat": self.location!.latitude, "lng" : self.location!.longitude, /*"modifiedAt": formatter.stringFromDate(now), */"text": self.newPostrMessage.text!, "title": self.newPostrText.text!/*, "viewCount": "0"*/]
                 let childUpdates = ["/\(key)": post]
                 self.postings.updateChildValues(childUpdates)
                 
                 //Save GeoFire
                 let oLocation = CLLocation(latitude: (self.location?.latitude)!, longitude: (self.location?.longitude)!)
-                self.geoFire.setLocation(oLocation, forKey: key) {
+                self.geoFire?.setLocation(oLocation, forKey: key) {
                     (error) in
                     if (error != nil) {
-                        let ac = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .Alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        let ac = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     } else {
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
                 

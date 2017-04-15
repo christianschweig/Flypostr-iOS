@@ -22,7 +22,7 @@ class MeTableViewController: UITableViewController {
     
     var auth: FIRAuth?
     var authUI: FIRAuthUI?
-    let users = FIRDatabase.database().referenceWithPath("users")
+    let users = FIRDatabase.database().reference(withPath: "users")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +35,9 @@ class MeTableViewController: UITableViewController {
         
         let profilePictureURL = auth?.currentUser?.photoURL
         if (profilePictureURL != nil) {
-            if let data = NSData(contentsOfURL: profilePictureURL!) {
+            if let data = try? Data(contentsOf: profilePictureURL!) {
                 let profilePictureImage = UIImage(data: data)
-                self.pictureButton.setImage(profilePictureImage, forState: .Normal)
+                self.pictureButton.setImage(profilePictureImage, for: UIControlState())
             }
         }
         
@@ -45,7 +45,7 @@ class MeTableViewController: UITableViewController {
         email.text = auth?.currentUser?.email
         
         let key = self.auth?.currentUser!.uid
-        self.users.child(key!).observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        self.users.child(key!).observe(FIRDataEventType.value, with: { (snapshot) in
             if let _ = snapshot.value as? NSNull {
                 self.nickName.text = self.auth?.currentUser?.displayName
             } else {
@@ -55,36 +55,36 @@ class MeTableViewController: UITableViewController {
         })
     }
     
-    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if (indexPath.section == 2 && indexPath.row == 0) {
-            let alertController = UIAlertController(title: "Change Nick Name", message: "Users can see your Nick Name on your Postrs", preferredStyle: UIAlertControllerStyle.Alert)
-            let submitAction = UIAlertAction(title: "Save", style: .Default, handler: { (handler) -> Void in
+            let alertController = UIAlertController(title: "Change Nick Name", message: "Users can see your Nick Name on your Postrs", preferredStyle: UIAlertControllerStyle.alert)
+            let submitAction = UIAlertAction(title: "Save", style: .default, handler: { (handler) -> Void in
                 let nicknameTextField = alertController.textFields![0]
                 let nicknameText = nicknameTextField.text!
                 self.users.child(self.auth!.currentUser!.uid).setValue(["nick": nicknameText])
             })
-            submitAction.enabled = false
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            alertController.addTextFieldWithConfigurationHandler({ (textField) -> Void in
+            submitAction.isEnabled = false
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addTextField(configurationHandler: { (textField) -> Void in
                 textField.placeholder = "Nick Name"
-                NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue(), usingBlock: { (notification) -> Void in
-                    submitAction.enabled = textField.text != ""
+                NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main, using: { (notification) -> Void in
+                    submitAction.isEnabled = textField.text != ""
                 })
             })
             alertController.addAction(submitAction)
             alertController.addAction(cancelAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
-    @IBAction func onLogout(sender: AnyObject) {
+    @IBAction func onLogout(_ sender: AnyObject) {
         do {
             try self.auth?.signOut()
         } catch {
             print("error")
         }
         
-        self.performSegueWithIdentifier("quit", sender: nil)
+        self.performSegue(withIdentifier: "quit", sender: nil)
     }
     
 //    @IBAction func onDeleteAccount(sender: AnyObject) {

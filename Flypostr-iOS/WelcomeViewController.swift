@@ -13,10 +13,21 @@ import FirebaseFacebookAuthUI
 import FirebaseGoogleAuthUI
 
 class WelcomeViewController: UIViewController, FIRAuthUIDelegate {
-
     var auth: FIRAuth?
     var authUI: FIRAuthUI?
-//  var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
+    //  var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
+    
+    /** @fn authUI:didSignInWithUser:error:
+     @brief Message sent after the sign in process has completed to report the signed in user or
+     error encountered.
+     @param authUI The @c FIRAuthUI instance sending the messsage.
+     @param user The signed in user if the sign in attempt was successful.
+     @param error The error that occured during sign in, if any.
+     */
+    public func authUI(_ firAuthUI: FIRAuthUI, didSignInWith user: FIRUser?, error: Error?) {
+        print("something happened");
+        authUI = firAuthUI
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +54,18 @@ class WelcomeViewController: UIViewController, FIRAuthUIDelegate {
 //        }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         print("photourl")
         print(auth?.currentUser?.photoURL)
-        if ((auth?.currentUser?.email) != nil) {
-            self.performSegueWithIdentifier("go", sender: nil)
+        print(auth?.currentUser?.email)
+        //if ((auth?.currentUser?.email) != nil) {
+        //  self.performSegue(withIdentifier: "go", sender: nil)
+        //} else {
+        if authUI != nil {
+            self.performSegue(withIdentifier: "go", sender: nil)
         } else {
             let controller = self.authUI!.authViewController()
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
@@ -60,17 +75,17 @@ class WelcomeViewController: UIViewController, FIRAuthUIDelegate {
 //        }
 //    }
     
-    @IBAction func onClick(sender: AnyObject) {
+    @IBAction func onClick(_ sender: AnyObject) {
         if ((auth?.currentUser?.email) != nil) {
-            self.performSegueWithIdentifier("go", sender: nil)
+            self.performSegue(withIdentifier: "go", sender: nil)
         } else {
             let controller = self.authUI!.authViewController()
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
-    func authUI(authUI: FIRAuthUI, didSignInWithUser user: FIRUser?, error: NSError?) {
-        self.performSegueWithIdentifier("go", sender: nil)
+    func authUI(_ authUI: FIRAuthUI, didSignInWith user: FIRUser?, error: NSError?) {
+        self.performSegue(withIdentifier: "go", sender: nil)
     }
 
 }
