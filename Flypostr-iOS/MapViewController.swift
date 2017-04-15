@@ -21,8 +21,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var regionQuery = GFRegionQuery()
     var keyArray = NSMutableArray()
     var annotationArray = [PostrAnnotation]()
-    let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geofire"))
-    let postings = FIRDatabase.database().referenceWithPath("postings")
+    let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference(withPath: "geofire"))
+    let postings = FIRDatabase.database().reference(withPath: "postings")
     var postrToPass = PostrAnnotation(key: "", title: "", subtitle: "", coordinate: CLLocation().coordinate, authorId: "", author: "", imageId: "", createdAt: "")
     
     override func viewDidLoad() {
@@ -42,9 +42,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let dummyLocation = CLLocation()
         let span = MKCoordinateSpanMake(0.800, 0.800)
         let region = MKCoordinateRegionMake(dummyLocation.coordinate, span)
-        self.regionQuery = geoFire.queryWithRegion(region)
+        self.regionQuery = (geoFire?.query(with: region))!
         
-        self.regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
+        
+        self.regionQuery.observe(.keyEntered, with: { (key: String?, location: CLLocation?) in
             print("Key '\(key)' entered the search area and is at location '\(location)'")
             
             var found = false
@@ -56,17 +57,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
             }
             if !found {
-                self.keyArray.addObject(key)
+                self.keyArray.add(key)
                 
-                self.geoFire.getLocationForKey(key as String, withCallback: { (location, error) in
+                self.geoFire!.getLocationForKey(key! as String, withCallback: { (location, error) in
                     if (error != nil) {
-                        print("An error occurred getting the location for \(key): \(error.localizedDescription)")
+                        print("An error occurred getting the location for \(key): \(error?.localizedDescription)")
                     } else if (location != nil) {
-                        print("Location for \(key) is [\(location.coordinate.latitude), \(location.coordinate.longitude)]")
+                        print("Location for \(key) is [\(location?.coordinate.latitude), \(location?.coordinate.longitude)]")
                         
-                        let postrAnno = PostrAnnotation(key: key, title: "", subtitle: "", coordinate: location.coordinate, authorId: "", author: "", imageId: "", createdAt: "")
+                        let postrAnno = PostrAnnotation(key: (key)!, title: "", subtitle: "", coordinate: location!.coordinate, authorId: "", author: "", imageId: "", createdAt: "")
                         
-                        self.postings.child(key).observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+                        self.postings.child(key!).observe(FIRDataEventType.value, with: { (snapshot) in
                             let postDict = snapshot.value as! [String : AnyObject]
                             postrAnno.title = postDict["title"] as! String?
                             postrAnno.subtitle = postDict["text"] as! String?
@@ -84,23 +85,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
             }
         })
-        self.regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
+        self.regionQuery.observe(.keyExited, with: { (key: String?, location: CLLocation?) in
             print("Key '\(key)' exited the search area and is at location '\(location)'")
             var index = 0
             for item: PostrAnnotation in self.annotationArray {
                 if (item.key == key) {
                     self.mapView.removeAnnotation(item)
-                    self.annotationArray.removeAtIndex(index)
+                    self.annotationArray.remove(at: index)
                 }
                 index = index + 1
             }
-            self.keyArray.removeObject(key)
+            self.keyArray.remove(key)
         })
-        
         mapView.delegate = self
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = manager.location!.coordinate
         self.currentPosition = newLocation
         
@@ -110,22 +110,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.regionQuery.region = region
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "itcc"
         
         if annotation is PostrAnnotation {
-            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             if (annotationView == nil) {
                 annotationView = MKPinAnnotationView(annotation: annotation as! PostrAnnotation, reuseIdentifier: identifier)
                 annotationView!.canShowCallout = true
                 
                 let postrAnno = annotation as! PostrAnnotation
                 let storage = FIRStorage.storage()
-                let storageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/thumbnails/")
+                let storageRef = storage.reference(forURL: "gs://flypostr-cd317.appspot.com/thumbnails/")
                 print(postrAnno.imageId)
                 if (postrAnno.imageId != nil) {
                     let imageRef = storageRef.child(postrAnno.imageId!)
-                    imageRef.dataWithMaxSize(1 * 2048 * 2048) { (data, error) -> Void in
+                    imageRef.data(withMaxSize: 1 * 2048 * 2048) { (data, error) -> Void in
                         if (error != nil) {
                             print("Error while downloading some Firebase Storage")
                         } else {
@@ -136,7 +136,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         }
                     }
                 }
-                let btn = UIButton(type: UIButtonType.DetailDisclosure)
+                let btn = UIButton(type: UIButtonType.detailDisclosure)
                 annotationView!.rightCalloutAccessoryView = btn
             } else {
                 annotationView!.annotation = annotation
@@ -146,24 +146,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return nil
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation = view.annotation as! PostrAnnotation
         self.postrToPass = annotation
-        self.performSegueWithIdentifier("showDetails", sender: nil)
+        self.performSegue(withIdentifier: "showDetails", sender: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "createNewPostr" {
             let location = self.currentPosition
-            let targetNavContr = segue.destinationViewController as! UINavigationController
+            let targetNavContr = segue.destination as! UINavigationController
             (targetNavContr.childViewControllers[0] as! NewPostrTableViewController).location = location
         } else if segue.identifier == "showDetails" {
-            let targetController = segue.destinationViewController as! DetailTableViewController
+            let targetController = segue.destination as! DetailTableViewController
             targetController.postr = self.postrToPass
         }
     }
     
-    @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindToMapViewController(_ segue: UIStoryboardSegue) {
         
     }
     

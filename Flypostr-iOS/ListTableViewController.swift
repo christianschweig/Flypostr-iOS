@@ -18,8 +18,8 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     var regionQuery = GFRegionQuery()
     var keyArray = NSMutableArray()
     var postingsArray = [PostrAnnotation]()
-    let geoFire = GeoFire(firebaseRef: FIRDatabase.database().referenceWithPath("geofire"))
-    let postings = FIRDatabase.database().referenceWithPath("postings")
+    let geoFire = GeoFire(firebaseRef: FIRDatabase.database().reference(withPath: "geofire"))
+    let postings = FIRDatabase.database().reference(withPath: "postings")
     var postrToPass = PostrAnnotation(key: "", title: "", subtitle: "", coordinate: CLLocation().coordinate, authorId: "", author: "", imageId: "", createdAt: "")
     
     override func viewDidLoad() {
@@ -36,9 +36,10 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
         let dummyLocation = CLLocation()
         let span = MKCoordinateSpanMake(0.800, 0.800)
         let region = MKCoordinateRegionMake(dummyLocation.coordinate, span)
-        self.regionQuery = geoFire.queryWithRegion(region)
+        self.regionQuery = (geoFire?.query(with: region))!
         
-        self.regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
+        /*
+        self.regionQuery.observe(.keyEntered, with: { (key: String!, location: CLLocation!) in
             print("Key '\(key)' entered the search area and is at location '\(location)'")
             
             var found = false
@@ -50,7 +51,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                 }
             }
             if !found {
-                self.keyArray.addObject(key)
+                self.keyArray.add(key)
                 
                 self.geoFire.getLocationForKey(key as String, withCallback: { (location, error) in
                     if (error != nil) {
@@ -60,7 +61,7 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                         
                         let postrAnno = PostrAnnotation(key: key, title: "", subtitle: "", coordinate: location.coordinate, authorId: "", author: "", imageId: "", createdAt: "")
                         
-                        self.postings.child(key).observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+                        self.postings.child(key).observe(FIRDataEventType.value, with: { (snapshot) in
                             let postDict = snapshot.value as! [String : AnyObject]
                             postrAnno.title = postDict["title"] as! String?
                             postrAnno.subtitle = postDict["text"] as! String?
@@ -76,21 +77,23 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                 })
                 
             }
-        })
-        self.regionQuery.observeEventType(.KeyExited, withBlock: { (key: String!, location: CLLocation!) in
+        })*/
+        /*
+        self.regionQuery.observe(.keyExited, with: { (key: String!, location: CLLocation!) in
             print("Key '\(key)' exited the search area and is at location '\(location)'")
             var index = 0
             for item: PostrAnnotation in self.postingsArray {
                 if (item.key == key) {
-                    self.postingsArray.removeAtIndex(index)
+                    self.postingsArray.remove(at: index)
                 }
                 index = index + 1
             }
-            self.keyArray.removeObject(key)
+            self.keyArray.remove(key)
         })
+         */
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = manager.location!.coordinate
         self.currentPosition = newLocation
         
@@ -103,26 +106,26 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.postingsArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
         cell.textLabel!.text = self.postingsArray[indexPath.row].title
         cell.detailTextLabel!.text = self.postingsArray[indexPath.row].subtitle
         let storage = FIRStorage.storage()
-        let storageRef = storage.referenceForURL("gs://flypostr-cd317.appspot.com/thumbnails/")
+        let storageRef = storage.reference(forURL: "gs://flypostr-cd317.appspot.com/thumbnails/")
         if (self.postingsArray[indexPath.row].imageId != nil) {
             let imageRef = storageRef.child(self.postingsArray[indexPath.row].imageId!)
-            imageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+            imageRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
                 if (error != nil) {
                     print("Error while downloading some Firebase Storage")
                 } else {
@@ -133,19 +136,19 @@ class ListTableViewController: UITableViewController, CLLocationManagerDelegate 
                 }
             }
         }
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.postrToPass = self.postingsArray[indexPath.row]
-        self.performSegueWithIdentifier("showDetails", sender: nil)
+        self.performSegue(withIdentifier: "showDetails", sender: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetails" {
-            let targetController = segue.destinationViewController as! DetailTableViewController
+            let targetController = segue.destination as! DetailTableViewController
             targetController.postr = self.postrToPass
         }
     }
